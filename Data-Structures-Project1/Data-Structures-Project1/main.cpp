@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SelectionInsertionSortAlgorithm.h"
 #include "SelectionAlgorithm.h"
+#include "MedianSelectionAlgorithm.h"
 using namespace std;
 
 
@@ -14,11 +15,12 @@ void printArray(int arr[], int n)
 
 int main()
 {
-    int arr[] = { 45, 3, 69, 97, 82, 16, 73, 40, 88 }; 
+    int arr[] = { 10,12,-8,-7}; 
     int n = sizeof(arr) / sizeof(arr[0]);
-
-    cout << SelectAlgorithm(arr, n, 9) << endl;
-    cout << selectionProblemUsingInsertionSort(arr, n, 9) << endl;
+    int i = 2;
+    cout << SelectAlgorithm(arr, n, i) << endl;
+    cout << selectionProblemUsingInsertionSort(arr, n, i) << endl;
+    cout<< MedianSelectionAlgorithm(arr,n,i) << endl;
     printArray(arr, n);
 
     return 0;
