@@ -1,5 +1,6 @@
 #include <iostream>
 #include "SelectionInsertionSortAlgorithm.h"
+#include "SelectionAlgorithm.h"
 using namespace std;
 
 
@@ -13,11 +14,11 @@ void printArray(int arr[], int n)
 
 int main()
 {
-    int arr[] = { 12, 11, 13, 5, 6 };
+    int arr[] = { 45, 3, 69, 97, 82, 16, 73, 40, 88 }; 
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    
-    cout << selectionProblemUsingInsertionSort(arr, n, 1) << endl;
+    cout << SelectAlgorithm(arr, n, 6) << endl;
+    cout << selectionProblemUsingInsertionSort(arr, n, 6) << endl;
     printArray(arr, n);
 
     return 0;
