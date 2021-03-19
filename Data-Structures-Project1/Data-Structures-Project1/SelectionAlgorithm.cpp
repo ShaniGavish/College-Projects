@@ -19,32 +19,17 @@ int SelectAlgorithmRecursive(int* arr, int left, int right, int index)
 
 int Partition(int* arr, int left, int right)
 {
-    int pivot = left; 
-    int curr = right;
+    int pivot = left, curr = right, direction = -1;
 	bool is_pivot_on_left = true;
+
 	while (pivot != curr) {
-		if (is_pivot_on_left) {
-			if (arr[pivot] > arr[curr]) {
-				swap(arr[pivot], arr[curr]);
-				swap(pivot, curr);
-				curr++;
-				is_pivot_on_left = false;
-			}
-			else {
-				curr--;
-			}
+		if (isSwap(arr, pivot, curr, is_pivot_on_left)) {
+			swap(arr[pivot], arr[curr]);
+			swap(pivot, curr);
+			direction = direction * -1;
+			is_pivot_on_left = !is_pivot_on_left;
 		}
-		else {
-			if (arr[pivot] < arr[curr]) {
-				swap(arr[pivot], arr[curr]);
-				swap(pivot, curr);
-				curr--;
-				is_pivot_on_left = true;
-			}
-			else {
-				curr++;
-			}
-		}
+		curr += direction;
 	}
 	return pivot;
 }
@@ -53,4 +38,11 @@ void swap(int& num1, int& num2) {
 	int temp = num1;
 	num1 = num2;
 	num2 = temp;
+}
+
+bool isSwap(int* arr, int pivot, int curr, bool is_pivot_on_left) {
+	if (is_pivot_on_left) {
+		return arr[pivot] > arr[curr];
+	}
+	return	arr[pivot] < arr[curr];
 }
