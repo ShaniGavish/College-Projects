@@ -2,7 +2,12 @@
 
 
 int SelectAlgorithm(int* arr, int arrLen, int index) {
-	return SelectAlgorithmRecursive(arr, 0, arrLen-1, index);
+	int* dup_arr = new int[arrLen];
+	for (int i = 0; i < arrLen; i++) {
+		dup_arr[i] = arr[i];
+	}
+	return SelectAlgorithmRecursive(dup_arr, 0, arrLen-1, index);
+	//delete
 }
 
 int SelectAlgorithmRecursive(int* arr, int left, int right, int index)

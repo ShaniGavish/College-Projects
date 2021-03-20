@@ -20,6 +20,11 @@ void insertionSortAlgorithm(int* arr, int arrLen)
 
 int selectionProblemUsingInsertionSort(int* arr, int arrLen, int index)
 {
-    insertionSortAlgorithm(arr, arrLen);
-    return arr[index - 1];
+    int* dup_arr = new int[arrLen];
+    for (int i = 0; i < arrLen; i++) {
+        dup_arr[i] = arr[i];
+    }
+    insertionSortAlgorithm(dup_arr, arrLen);
+    //delete
+    return dup_arr[index - 1];
 }

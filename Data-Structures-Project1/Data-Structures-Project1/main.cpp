@@ -1,7 +1,5 @@
-#include <iostream>
-#include "SelectionInsertionSortAlgorithm.h"
-#include "SelectionAlgorithm.h"
-#include "MedianSelectionAlgorithm.h"
+#include "main.h"
+
 using namespace std;
 
 
@@ -15,13 +13,58 @@ void printArray(int arr[], int n)
 
 int main()
 {
-    int arr[] = { 10,12,-8,-7}; 
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int i = 2;
-    cout << SelectAlgorithm(arr, n, i) << endl;
-    cout << selectionProblemUsingInsertionSort(arr, n, i) << endl;
-    cout<< MedianSelectionAlgorithm(arr,n,i) << endl;
-    printArray(arr, n);
+	/*int num_of_nums, index;
+	cin >> num_of_nums;
+	cin >> index;
+	int* arr = new int[num_of_nums];
 
-    return 0;
+	for (int i = 0; i < num_of_nums; i++) {
+		cin >> arr[i];
+	}*/
+
+	int arr[] = { 1,12,3,200,-1,2,18};
+	int num_of_nums = 7;
+	int index = 4;
+
+	cout << selectionProblemUsingInsertionSort(arr, num_of_nums, index) << endl;
+	cout << SelectAlgorithm(arr, num_of_nums, index) << endl;
+	cout << MedianSelectionAlgorithm(arr, num_of_nums, index) << endl;
+	
+	/*auto start = chrono::high_resolution_clock::now();
+	ios_base::sync_with_stdio(false);
+	cout << selectionProblemUsingInsertionSort(arr, num_of_nums, index) << endl;
+	auto end = chrono::high_resolution_clock::now();
+	double time_taken =
+		chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+	time_taken *= 1e-9;
+	ofstream myfile("Measure.txt");
+	myfile << "Time taken by function lselectionProblemUsingInsertionSort is : " << fixed
+		<< time_taken << setprecision(9);
+	myfile << " sec" << endl;
+
+	start = chrono::high_resolution_clock::now();
+	ios_base::sync_with_stdio(false);
+	cout << SelectAlgorithm(arr, num_of_nums, index) << endl;
+	end = chrono::high_resolution_clock::now();
+	time_taken =
+		chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+	time_taken *= 1e-9;
+	myfile << "Time taken by function SelectAlgorithm is : " << fixed
+		<< time_taken << setprecision(9);
+	myfile << " sec" << endl;
+
+
+	start = chrono::high_resolution_clock::now();
+	ios_base::sync_with_stdio(false);
+	cout << MedianSelectionAlgorithm(arr, num_of_nums, index) << endl;
+	end = chrono::high_resolution_clock::now();
+	time_taken =
+		chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+	time_taken *= 1e-9;
+	myfile << "Time taken by function MedianSelectionAlgorithm is : " << fixed
+		<< time_taken << setprecision(9);
+	myfile << " sec" << endl;
+	myfile.close();*/
+
+    
 }

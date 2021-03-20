@@ -1,0 +1,9 @@
+#pragma once
+#include <iostream>
+#include <algorithm>
+#include <fstream>
+#include <chrono> 
+#include <iomanip>
+#include "SelectionInsertionSortAlgorithm.h"
+#include "SelectionAlgorithm.h"
+#include "MedianSelectionAlgorithm.h"

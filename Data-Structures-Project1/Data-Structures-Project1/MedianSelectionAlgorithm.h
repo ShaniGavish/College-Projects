@@ -1,7 +1,8 @@
 #pragma once
 
 int MedianSelectionAlgorithm(int* arr, int arrLen, int index);
-int getMedianOfMediansIndex(int* arr, int arrLen);
+int MedianSelectionAlgorithmRecursion(int* arr, int left, int right, int index);
+int getMedianOfMediansIndex(int* arr, int left, int right);
 void bubbleSort(int* arr, int left, int right);
 void swap2(int& num1, int& num2);
 

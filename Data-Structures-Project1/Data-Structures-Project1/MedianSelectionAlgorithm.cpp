@@ -1,6 +1,7 @@
 #include "MedianSelectionAlgorithm.h"
 #include "SelectionAlgorithm.h"
-
+#include <iostream>
+using namespace std;
 int PARTS = 5;
 
 void swap2(int& num1, int& num2) {
@@ -13,50 +14,62 @@ void bubbleSort(int* arr, int left, int right)
 {
     int i, j,n;
     n = right - left + 1;
-    for (i = 0; i < n ; i++)
-
-        // Last i elements are already in place  
-        for (j = left; j < right - i; j++)
+    for (i = 0; i < n; i++) {
+        for (j = left; j < right - i; j++) {
             if (arr[j] > arr[j + 1])
                 swap2(arr[j], arr[j + 1]);
+        }     
+    }    
 }
-
 
 int MedianSelectionAlgorithm(int* arr, int arrLen, int index) {
+    int* dup_arr = new int[arrLen];
+    for (int i = 0; i < arrLen; i++) {
+        dup_arr[i] = arr[i];
+    }
+    //delete
+    return MedianSelectionAlgorithmRecursion(arr, 0, arrLen - 1, index);
+}
+
+int MedianSelectionAlgorithmRecursion(int* arr, int left, int right, int index) {
+    int arrLen = right - left + 1;
     if (arrLen <= PARTS) {
-        bubbleSort(arr, 0,arrLen-1);
-        return arr[index-1];
+        bubbleSort(arr, left, right);
+        return arr[left + index -1];
     }
     else {
-        int right,pivot, k;
+        int right_edge ,pivot, k;
         for (int i = 0; i < arrLen; i+= PARTS) {
-            right = i + PARTS < arrLen ? i + PARTS : arrLen;
-            bubbleSort(arr, i, right-1);
+            right_edge = i + PARTS < arrLen ? i + PARTS : arrLen;
+            bubbleSort(arr, i, right_edge-1);
         }
-        pivot = getMedianOfMediansIndex(arr, arrLen);
-        swap2(arr[0], arr[pivot]);
-        k = Partition(arr, 0, arrLen-1);
-        if (index == k) {
-            return index;
+        pivot = getMedianOfMediansIndex(arr, left,right);
+        swap2(arr[left], arr[pivot]);
+        k = Partition(arr, left, right);
+        if (index-1 == k) {
+            return arr[left + k];
         }
         if (index < k) {
-            return SelectAlgorithmRecursive(arr, 0, k - 1, index);
+            return MedianSelectionAlgorithmRecursion(arr, left, k - 1, index);
         }
-        return SelectAlgorithmRecursive(arr, k, arrLen - 1, index-k);
+        return MedianSelectionAlgorithmRecursion(arr, k, right , index-k);
     }
 }
 
-int getMedianOfMediansIndex(int* arr, int arrLen) {
+int getMedianOfMediansIndex(int* arr, int left, int right) {
     int i;
-    int size = arrLen % PARTS > 0 ? arrLen / PARTS + 1 : arrLen / PARTS;
-    int* medians_arr = new int[size];
-    for (i = 0; i < size; i ++) {
-        medians_arr[i] = arr[i * PARTS + PARTS/2];
+    int size = right - left + 1;
+    int amountOfMedians= size % PARTS > 0 ? size / PARTS + 1 : size / PARTS;
+    int* medians_arr = new int[amountOfMedians];
+    for (i = 0; i < amountOfMedians-1; i ++) {
+        medians_arr[i] = arr[left + i * PARTS + PARTS/2];
     }
-    int median_of_medians = SelectAlgorithm(medians_arr, size, size / 2);
-    for (i = 0; i < arrLen; i++) {
+    int medianIdent = size % PARTS != 0 ? size % PARTS / 2 : PARTS / 2;
+    medians_arr[i] = arr[left + i * PARTS + medianIdent];
+    int median_of_medians = MedianSelectionAlgorithm(medians_arr, amountOfMedians, amountOfMedians / 2);
+    for (i = left; i < right; i++) {
         if (arr[i] == median_of_medians) {
-            delete[] medians_arr;
+            //delete[] medians_arr;
             return i;
         }
     }
