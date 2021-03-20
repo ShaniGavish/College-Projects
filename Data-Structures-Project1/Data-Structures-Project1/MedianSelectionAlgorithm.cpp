@@ -1,33 +1,8 @@
 #include "MedianSelectionAlgorithm.h"
-#include "SelectionAlgorithm.h"
-#include <iostream>
-using namespace std;
+
 int PARTS = 5;
 
-void swap2(double& num1, double& num2) {
-    double temp = num1;
-    num1 = num2;
-    num2 = temp;
-}
-
-void bubbleSort(double* arr, int left, int right)
-{
-    int i, j,n;
-    n = right - left + 1;
-    for (i = 0; i < n; i++) {
-        for (j = left; j < right - i; j++) {
-            if (arr[j] > arr[j + 1])
-                swap2(arr[j], arr[j + 1]);
-        }     
-    }    
-}
-
 double MedianSelectionAlgorithm(double* arr, int arrLen, int index) {
-    int* dup_arr = new int[arrLen];
-    for (int i = 0; i < arrLen; i++) {
-        dup_arr[i] = arr[i];
-    }
-    //delete
     return MedianSelectionAlgorithmRecursion(arr, 0, arrLen - 1, index);
 }
 
@@ -44,8 +19,8 @@ double MedianSelectionAlgorithmRecursion(double* arr, int left, int right, int i
             bubbleSort(arr, i, right_edge-1);
         }
         pivot = getMedianOfMediansIndex(arr, left,right);
-        swap2(arr[left], arr[pivot]);
-        k = Partition(arr, left, right);
+        Utilities<double>::swap(arr[left], arr[pivot]);
+        k = Utilities<double>::Partition(arr, left, right);
         if (index-1 == k) {
             return arr[left + k];
         }
@@ -69,8 +44,20 @@ int getMedianOfMediansIndex(double* arr, int left, int right) {
     double median_of_medians = MedianSelectionAlgorithm(medians_arr, amountOfMedians, amountOfMedians / 2);
     for (i = left; i < right; i++) {
         if (arr[i] == median_of_medians) {
-            //delete[] medians_arr;
+            delete[] medians_arr;
             return i;
+        }
+    }
+}
+
+void bubbleSort(double* arr, int left, int right)
+{
+    int i, j, n;
+    n = right - left + 1;
+    for (i = 0; i < n; i++) {
+        for (j = left; j < right - i; j++) {
+            if (arr[j] > arr[j + 1])
+                Utilities<double>::swap(arr[j], arr[j + 1]);
         }
     }
 }

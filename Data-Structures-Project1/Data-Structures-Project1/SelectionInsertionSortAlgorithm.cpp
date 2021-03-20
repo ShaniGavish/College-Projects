@@ -1,4 +1,3 @@
-#include <iostream>
 #include "SelectionInsertionSortAlgorithm.h"
 
 void insertionSortAlgorithm(double* arr, int arrLen)
@@ -21,11 +20,6 @@ void insertionSortAlgorithm(double* arr, int arrLen)
 
 double selectionProblemUsingInsertionSort(double* arr, int arrLen, int index)
 {
-    double* dup_arr = new double[arrLen];
-    for (int i = 0; i < arrLen; i++) {
-        dup_arr[i] = arr[i];
-    }
-    insertionSortAlgorithm(dup_arr, arrLen);
-    //delete
-    return dup_arr[index - 1];
+    insertionSortAlgorithm(arr, arrLen);
+    return arr[index - 1];
 }
