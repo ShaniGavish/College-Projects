@@ -1,9 +1,9 @@
 #pragma once
 
-int MedianSelectionAlgorithm(int* arr, int arrLen, int index);
-int MedianSelectionAlgorithmRecursion(int* arr, int left, int right, int index);
-int getMedianOfMediansIndex(int* arr, int left, int right);
-void bubbleSort(int* arr, int left, int right);
-void swap2(int& num1, int& num2);
+double MedianSelectionAlgorithm(double* arr, int arrLen, int index);
+double MedianSelectionAlgorithmRecursion(double* arr, int left, int right, int index);
+int getMedianOfMediansIndex(double* arr, int left, int right);
+void bubbleSort(double* arr, int left, int right);
+void swap2(double& num1, double& num2);
 
 extern int PARTS;

@@ -1,9 +1,10 @@
 #include <iostream>
 #include "SelectionInsertionSortAlgorithm.h"
 
-void insertionSortAlgorithm(int* arr, int arrLen)
+void insertionSortAlgorithm(double* arr, int arrLen)
 {
-    int currentVal, j;
+    int i, j;
+    double currentVal;
     for (int i = 1; i < arrLen; i++)
     {
         currentVal = arr[i];
@@ -18,9 +19,9 @@ void insertionSortAlgorithm(int* arr, int arrLen)
     }
 }
 
-int selectionProblemUsingInsertionSort(int* arr, int arrLen, int index)
+double selectionProblemUsingInsertionSort(double* arr, int arrLen, int index)
 {
-    int* dup_arr = new int[arrLen];
+    double* dup_arr = new double[arrLen];
     for (int i = 0; i < arrLen; i++) {
         dup_arr[i] = arr[i];
     }

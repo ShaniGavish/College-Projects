@@ -4,13 +4,13 @@
 using namespace std;
 int PARTS = 5;
 
-void swap2(int& num1, int& num2) {
-    int temp = num1;
+void swap2(double& num1, double& num2) {
+    double temp = num1;
     num1 = num2;
     num2 = temp;
 }
 
-void bubbleSort(int* arr, int left, int right)
+void bubbleSort(double* arr, int left, int right)
 {
     int i, j,n;
     n = right - left + 1;
@@ -22,7 +22,7 @@ void bubbleSort(int* arr, int left, int right)
     }    
 }
 
-int MedianSelectionAlgorithm(int* arr, int arrLen, int index) {
+double MedianSelectionAlgorithm(double* arr, int arrLen, int index) {
     int* dup_arr = new int[arrLen];
     for (int i = 0; i < arrLen; i++) {
         dup_arr[i] = arr[i];
@@ -31,7 +31,7 @@ int MedianSelectionAlgorithm(int* arr, int arrLen, int index) {
     return MedianSelectionAlgorithmRecursion(arr, 0, arrLen - 1, index);
 }
 
-int MedianSelectionAlgorithmRecursion(int* arr, int left, int right, int index) {
+double MedianSelectionAlgorithmRecursion(double* arr, int left, int right, int index) {
     int arrLen = right - left + 1;
     if (arrLen <= PARTS) {
         bubbleSort(arr, left, right);
@@ -56,17 +56,17 @@ int MedianSelectionAlgorithmRecursion(int* arr, int left, int right, int index) 
     }
 }
 
-int getMedianOfMediansIndex(int* arr, int left, int right) {
+int getMedianOfMediansIndex(double* arr, int left, int right) {
     int i;
     int size = right - left + 1;
     int amountOfMedians= size % PARTS > 0 ? size / PARTS + 1 : size / PARTS;
-    int* medians_arr = new int[amountOfMedians];
+    double* medians_arr = new double[amountOfMedians];
     for (i = 0; i < amountOfMedians-1; i ++) {
         medians_arr[i] = arr[left + i * PARTS + PARTS/2];
     }
     int medianIdent = size % PARTS != 0 ? size % PARTS / 2 : PARTS / 2;
     medians_arr[i] = arr[left + i * PARTS + medianIdent];
-    int median_of_medians = MedianSelectionAlgorithm(medians_arr, amountOfMedians, amountOfMedians / 2);
+    double median_of_medians = MedianSelectionAlgorithm(medians_arr, amountOfMedians, amountOfMedians / 2);
     for (i = left; i < right; i++) {
         if (arr[i] == median_of_medians) {
             //delete[] medians_arr;

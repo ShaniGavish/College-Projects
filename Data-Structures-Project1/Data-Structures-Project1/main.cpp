@@ -22,7 +22,7 @@ int main()
 		cin >> arr[i];
 	}*/
 
-	int arr[] = { 1,12,3,200,-1,2,18};
+	double arr[] = { 1,12,3.6,200,-1,2,18};
 	int num_of_nums = 7;
 	int index = 4;
 
