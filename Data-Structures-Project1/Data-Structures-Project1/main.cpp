@@ -1,47 +1,28 @@
 #include "main.h"
-
 using namespace std;
-
-
-void printArray(int arr[], int n)
-{
-    int i;
-    for (i = 0; i < n; i++)
-        cout << arr[i] << " ";
-    cout << endl;
-}
 
 int main()
 {
-	/*int num_of_nums, index;
-	cin >> num_of_nums;
+	int arr_len, index;
+
+	cin >> arr_len;
 	cin >> index;
-	int* arr = new int[num_of_nums];
 
-	for (int i = 0; i < num_of_nums; i++) {
-		cin >> arr[i];
-	}*/
+	validateIndexInput(index, arr_len);
 
-	double arr[] = { 1,12,3.6,200,-1,2,18};
-	int num_of_nums = 7;
-	int index = 4;
-	double* arr1 = new double[num_of_nums];
-	double* arr2 = new double[num_of_nums];
-	double* arr3 = new double[num_of_nums];
-	for (int i = 0; i < num_of_nums; i++) {
-		arr1[i] = arr[i];
-		arr2[i] = arr[i];
-		arr3[i] = arr[i];
-	}
+	double* arr = new double[arr_len];
+	getInputArrFromUsr(arr, arr_len);
 
-	cout << selectionProblemUsingInsertionSort(arr1, num_of_nums, index) << endl;
-	cout << SelectAlgorithm(arr2, num_of_nums, index) << endl;
-	cout << MedianSelectionAlgorithm(arr3, num_of_nums, index) << endl;
-	
+	double* arr1 = Utilities<double>::duplicateArr(arr, arr_len);
+	double* arr2 = Utilities<double>::duplicateArr(arr, arr_len);
 
-	/*auto start = chrono::high_resolution_clock::now();
+	std::cout << std::fixed;
+	std::cout << std::setprecision(4);
+
+
+	auto start = chrono::high_resolution_clock::now();
 	ios_base::sync_with_stdio(false);
-	cout << selectionProblemUsingInsertionSort(arr1, num_of_nums, index) << endl;
+	cout << selectionProblemUsingInsertionSort(arr, arr_len, index) << endl;
 	auto end = chrono::high_resolution_clock::now();
 	double time_taken =
 		chrono::duration_cast<chrono::nanoseconds>(end - start).count();
@@ -53,7 +34,7 @@ int main()
 
 	start = chrono::high_resolution_clock::now();
 	ios_base::sync_with_stdio(false);
-	cout << SelectAlgorithm(arr2, num_of_nums, index) << endl;
+	cout << SelectAlgorithm(arr1, arr_len, index) << endl;
 	end = chrono::high_resolution_clock::now();
 	time_taken =
 		chrono::duration_cast<chrono::nanoseconds>(end - start).count();
@@ -62,10 +43,9 @@ int main()
 		<< time_taken << setprecision(9);
 	myfile << " sec" << endl;
 
-
 	start = chrono::high_resolution_clock::now();
 	ios_base::sync_with_stdio(false);
-	cout << MedianSelectionAlgorithm(arr3, num_of_nums, index) << endl;
+	cout << MedianSelectionAlgorithm(arr, arr_len, index) << endl;
 	end = chrono::high_resolution_clock::now();
 	time_taken =
 		chrono::duration_cast<chrono::nanoseconds>(end - start).count();
@@ -74,7 +54,32 @@ int main()
 		<< time_taken << setprecision(9);
 	myfile << " sec" << endl;
 	
-	myfile.close();*/
+	myfile.close();
 
-    
+	delete[] arr;
+	delete[] arr1;
+	delete[] arr2;
+}
+
+void getInputArrFromUsr(double* arr, int arr_len) {
+	string input;
+	getline(cin, input);
+	for (int i = 0; i < arr_len; i++) {
+		getline(cin, input);
+		regex pattern("^[-+]?[0-9]+(\.[0-9]{1,4})$");
+		if (regex_match(input, pattern)) {
+			arr[i] = stod(input);
+		}
+		else {
+			cout << "wrong input";
+			exit(1);
+		}
+	}
+}
+
+void validateIndexInput(int index, int arrLen) {
+	if (index<1 || index > arrLen) {
+		cout << "wrong input";
+		exit(1);
+	}
 }

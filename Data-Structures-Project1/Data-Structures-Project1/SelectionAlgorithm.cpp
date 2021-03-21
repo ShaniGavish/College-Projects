@@ -1,7 +1,7 @@
 #include "SelectionAlgorithm.h"
 
-double SelectAlgorithm(double* arr, int arrLen, int index) {
-	return SelectAlgorithmRecursive(arr, 0, arrLen - 1, index);
+double SelectAlgorithm(double* arr, int arr_len, int index) {
+	return SelectAlgorithmRecursive(arr, 0, arr_len - 1, index);
 }
 
 double SelectAlgorithmRecursive(double* arr, int left, int right, int index)

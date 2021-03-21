@@ -4,12 +4,12 @@ using namespace std;
 
 template <class T>
 class Utilities {
-private:
-	static bool isSwap(T* arr, int pivot, int curr, bool is_pivot_on_left); //This is private static function for partition
-public:
-	static void swap(T& num1, T& num2); // swap 2 values
-	static T* duplicateArr(T* arr, int arrLen);
-	static int Partition(T* arr, int left, int right);
+	private:
+		static bool isSwap(T* arr, int pivot, int curr, bool is_pivot_on_left); //This is private static function for partition
+	public:
+		static void swap(T& num1, T& num2); // swap 2 values
+		static T* duplicateArr(T* arr, int arrLen);
+		static int Partition(T* arr, int left, int right);
 };
 
 template <class T>
