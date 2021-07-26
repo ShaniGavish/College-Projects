@@ -3,47 +3,30 @@
 int PARTS = 5;
 
 double MedianSelectionAlgorithm(double* arr, int arr_len, int index) {
-    return MedianSelectionAlgorithmRecursion(arr, 0, arr_len - 1, index);
+    return MedianSelectionAlgorithmRecursion(arr, arr_len, index - 1);
 }
 
-double MedianSelectionAlgorithmRecursion(double* arr, int left, int right, int index) {
-    int arr_len = right - left + 1;
+double MedianSelectionAlgorithmRecursion(double* arr, int arr_len, int index) {
+
     if (arr_len <= PARTS) {
-        bubbleSort(arr, left, right);
-        return arr[left + index -1];
+        bubbleSort(arr, 0, arr_len - 1);
+        return arr[index];
     }
-    else {
-        int pivot, pivotIndex;
-        divideArrays(arr, arr_len);
-        pivot = getMedianOfMediansIndex(arr, left,right);
-        pivotIndex = findPivotIndexByPartition(arr, left, right, pivot);
-        if (index-1 == pivotIndex) {
-            return arr[left + pivotIndex];
-        }
-        if (index < pivotIndex) {
-            return MedianSelectionAlgorithmRecursion(arr, left, pivotIndex - 1, index);
-        }
-        return MedianSelectionAlgorithmRecursion(arr, pivotIndex, right , index- pivotIndex);
-    }
-}
+    int right_edge, medians_arr_len = (arr_len + PARTS - 1) / PARTS;
+    double* medians_arr = new double[medians_arr_len];
 
-int getMedianOfMediansIndex(double* arr, int left, int right) {
-    int i, arr_len = right - left + 1;
-    int amountOfMedians = arr_len % PARTS > 0 ? arr_len / PARTS + 1 : arr_len / PARTS;
+    medians_arr = divideArrayAndGetMediansArr(arr, arr_len);
+    double median_of_medians = MedianSelectionAlgorithmRecursion(medians_arr, medians_arr_len, (medians_arr_len + 1) / 2);
+    delete[] medians_arr;
 
-    double* medians_arr = createMediansArr(arr, amountOfMedians, left);
+    int median_of_medians_index = findMedianOfMediansIndexInArr(arr, arr_len, median_of_medians);
+    int median_of_medians_position = Utilities<double>::Partition(arr, 0, arr_len - 1);
 
-    int medianIdent = arr_len % PARTS != 0 ? arr_len % PARTS / 2 : PARTS / 2;
-    medians_arr[amountOfMedians - 1] = arr[left + (amountOfMedians - 1) * PARTS + medianIdent];
-
-    double median_of_medians = MedianSelectionAlgorithm(medians_arr, amountOfMedians, amountOfMedians / 2);
-    
-    for (i = left; i < right; i++) {
-        if (arr[i] == median_of_medians) {
-            delete[] medians_arr;
-            return i;
-        }
-    }
+    if (index < median_of_medians_position)
+        return MedianSelectionAlgorithmRecursion(arr, median_of_medians_position, index);
+    if (index > median_of_medians_position)
+        return MedianSelectionAlgorithmRecursion(arr + median_of_medians_position, arr_len - median_of_medians_position, index - median_of_medians_position);
+    return median_of_medians;
 }
 
 void bubbleSort(double* arr, int left, int right)
@@ -58,23 +41,27 @@ void bubbleSort(double* arr, int left, int right)
     }
 }
 
-void divideArrays(double* arr, int arr_len) {
-    int right_edge;
-    for (int i = 0; i < arr_len; i += PARTS) {
+double* divideArrayAndGetMediansArr(double* arr, int arr_len) {
+    int right_edge, medians_arr_len = (arr_len + PARTS - 1) / PARTS;
+    double* medians_arr = new double[medians_arr_len];
+
+    for (int i = 0, j = 0; i < arr_len; i += PARTS, j++) {
         right_edge = i + PARTS < arr_len ? i + PARTS : arr_len;
         bubbleSort(arr, i, right_edge - 1);
-    }
-}
-
-double* createMediansArr(double* arr, int amountOfMedians, int left) {
-    double* medians_arr = new double[amountOfMedians];
-    for (int i = 0; i < amountOfMedians - 1; i++) {
-        medians_arr[i] = arr[left + i * PARTS + PARTS / 2];
+        medians_arr[j] = arr[i + (right_edge - i) / 2];
     }
     return medians_arr;
 }
 
-int findPivotIndexByPartition(double* arr, int left, int right, int pivot) {
-    Utilities<double>::swap(arr[left], arr[pivot]);
-    return Utilities<double>::Partition(arr, left, right);
+int findMedianOfMediansIndexInArr(double* arr, int arr_len, double median_of_medians) {
+    int median_of_medians_index = 0;
+    for (int i = 0; i < arr_len; i++) {
+        if (arr[i] == median_of_medians) {
+            median_of_medians_index = i;
+        }
+    }
+    if (median_of_medians_index != 0) {
+        Utilities<double>::swap(arr[0], arr[median_of_medians_index]);
+    }
+    return median_of_medians_index;
 }

@@ -1,0 +1,3 @@
+Time taken by function selectionProblemUsingInsertionSort is : 0.009118 sec
+Time taken by function SelectAlgorithm is : 0.001463400 sec
+Time taken by function MedianSelectionAlgorithm is : 0.000403900 sec

@@ -1,0 +1,25 @@
+﻿  main.cpp
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\main.cpp(31,20): warning C4244: 'initializing': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\main.cpp(44,64): warning C4244: '=': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\main.cpp(55,64): warning C4244: '=': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\main.cpp(101,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\main.cpp(118,36): warning C4018: '<': signed/unsigned mismatch
+  MedianSelectionAlgorithm.cpp
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\MedianSelectionAlgorithm.cpp(15,9): warning C4101: 'right_edge': unreferenced local variable
+  SelectionAlgorithm.cpp
+  SelectionInsertionSortAlgorithm.cpp
+C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Data-Structures-Project1\SelectionInsertionSortAlgorithm.cpp(5,9): warning C4101: 'i': unreferenced local variable
+  Generating Code...
+  Data-Structures-Project1.vcxproj -> C:\Users\shani\OneDrive\שולחן העבודה\College-Projects\Data-Structures-Project1\Debug\Data-Structures-Project1.exe
